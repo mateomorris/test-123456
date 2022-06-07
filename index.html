@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" data-svelte="svelte-5creba">
+    <meta charset="UTF-8" data-svelte="svelte-5creba">
+    <style data-svelte="svelte-5creba">
+        @import url("https://unpkg.com/@primo-app/primo@1.3.64/reset.css");
+
+        html {
+
+            /* Colors */
+            --color-accent: #154BF4;
+
+            /* Default property values */
+            --background: white;
+            --color: #222;
+            --padding: 2rem;
+            --box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+            --border-radius: 8px;
+            --max-width: 1200px;
+            --border-color: #CBCACE;
+            --transition-time: 0.1s;
+            --transition: var(--transition-time) color,
+                var(--transition-time) background-color,
+                var(--transition-time) border-color,
+                var(--transition-time) text-decoration-color,
+                var(--transition-time) box-shadow, var(--transtion-time) transform;
+        }
+
+        .primo-page {
+            font-family: system-ui, sans-serif;
+            color: var(--color);
+            line-height: 1.6;
+            font-size: 1rem;
+            background: var(--background);
+        }
+
+        .primo-section .primo-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--padding);
+        }
+
+        .primo-section .primo-content img {
+            width: 100%;
+            margin: 2rem 0;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+        }
+
+        .primo-section .primo-content p {
+            padding: 0.25rem 0;
+            line-height: 1.5;
+        }
+
+        .primo-section .primo-content a {
+            text-decoration: underline;
+        }
+
+        .primo-section .primo-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .primo-section .primo-content h2 {
+            font-size: 2.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .primo-section .primo-content h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .primo-section .primo-content ul {
+            list-style: disc;
+            padding: 0.5rem 0;
+            padding-left: 1.25rem;
+        }
+
+        .primo-section .primo-content ol {
+            list-style: decimal;
+            padding: 0.5rem 0;
+            padding-left: 1.25rem;
+        }
+
+        .primo-section .primo-content blockquote {
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+        }
+
+        .section-container {
+            max-width: var(--max-width, 1200px);
+            margin: 0 auto;
+            padding: 3rem var(--padding, 1rem);
+        }
+
+        .heading {
+            font-size: 3rem;
+            line-height: 1;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .button {
+            color: white;
+            background: var(--color-accent);
+            border-radius: 5px;
+            padding: 8px 20px;
+            transition: var(--transition);
+        }
+
+        .button:hover {
+            box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .button.inverted {
+            background: transparent;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+        }
+    </style>
+    <script async>
+        let data = {}
+        fetch('/en.json').then(res => res.json()).then(res => {
+            data = res
+        })
+    </script>
+</head>
+
+<body class="primo-page">
+
+    <style>
+        @import url("https://unpkg.com/modern-normalize@1.1.0/modern-normalize.css");
+
+        header.svelte-vxxv0k.svelte-vxxv0k {
+            border-bottom: 1px solid var(--border-color)
+        }
+
+        .section-container.svelte-vxxv0k.svelte-vxxv0k {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem
+        }
+
+        nav.svelte-vxxv0k.svelte-vxxv0k {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem
+        }
+
+        nav.svelte-vxxv0k .logo.svelte-vxxv0k {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-right: 1.5rem
+        }
+
+        nav.svelte-vxxv0k a.link.svelte-vxxv0k {
+            display: none;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.1s
+        }
+
+        nav.svelte-vxxv0k a.link.svelte-vxxv0k:hover {
+            border-color: var(--color-accent, #154BF4)
+        }
+
+        nav.svelte-vxxv0k button#close.svelte-vxxv0k {
+            display: none
+        }
+
+        .call-to-action.svelte-vxxv0k.svelte-vxxv0k {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-left: auto
+        }
+
+        .call-to-action.svelte-vxxv0k button#open.svelte-vxxv0k {
+            color: var(--color-accent);
+            margin-left: auto
+        }
+
+        .call-to-action.svelte-vxxv0k a.svelte-vxxv0k {
+            display: none;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.1s
+        }
+
+        .call-to-action.svelte-vxxv0k a.svelte-vxxv0k:hover {
+            border-color: var(--color-accent, #154BF4)
+        }
+
+        nav#mobile-nav.svelte-vxxv0k.svelte-vxxv0k {
+            position: absolute;
+            flex-direction: column;
+            text-align: center;
+            background-color: var(--background-color, white);
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+            left: 0.5rem;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 2rem
+        }
+
+        nav#mobile-nav.svelte-vxxv0k a.logo.svelte-vxxv0k {
+            margin-right: 0
+        }
+
+        nav#mobile-nav.svelte-vxxv0k a.link.svelte-vxxv0k {
+            display: block
+        }
+
+        nav#mobile-nav.svelte-vxxv0k hr.svelte-vxxv0k {
+            width: 100%
+        }
+
+        nav#mobile-nav.svelte-vxxv0k .button.svelte-vxxv0k {
+            width: 100%;
+            justify-content: center
+        }
+
+        nav#mobile-nav.svelte-vxxv0k button#close.svelte-vxxv0k {
+            display: block;
+            position: absolute;
+            right: 1rem;
+            top: 1rem
+        }
+
+        nav#mobile-nav.svelte-vxxv0k button#close svg.svelte-vxxv0k {
+            color: var(--color-accent, #154BF4);
+            width: 1.5rem;
+            height: 1.5rem
+        }
+
+        @media(min-width: 600px) {
+
+            #open.svelte-vxxv0k.svelte-vxxv0k,
+            #mobile-nav.svelte-vxxv0k.svelte-vxxv0k {
+                display: none
+            }
+
+            nav.svelte-vxxv0k a.link.svelte-vxxv0k {
+                display: inline-block
+            }
+
+            .call-to-action.svelte-vxxv0k a.svelte-vxxv0k {
+                display: inline-block
+            }
+        }
+    </style>
+    <div class="primo-section has-component" id="acihl">
+        <div class="primo-component">
+            <header class="svelte-vxxv0k">
+                <div class="section-container svelte-vxxv0k">
+                    <nav class="svelte-vxxv0k"><a href="/" class="logo svelte-vxxv0k">Nulla irure et</a>
+                        <a href="/" class="link svelte-vxxv0k">sit</a><a href="/" class="link svelte-vxxv0k">consectetur</a>
+                    </nav>
+                    <div class="call-to-action svelte-vxxv0k"><button id="open" aria-label="Open mobile navigation" class="svelte-vxxv0k"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.4643 17.0213H0.535714C0.239866 17.0213 0 17.3071 0 17.6596V19.3617C0 19.7142 0.239866 20 0.535714 20H19.4643C19.7601 20 20 19.7142 20 19.3617V17.6596C20 17.3071 19.7601 17.0213 19.4643 17.0213ZM19.4643 8.51064H0.535714C0.239866 8.51064 0 8.79644 0 9.14894V10.8511C0 11.2036 0.239866 11.4894 0.535714 11.4894H19.4643C19.7601 11.4894 20 11.2036 20 10.8511V9.14894C20 8.79644 19.7601 8.51064 19.4643 8.51064ZM19.4643 0H0.535714C0.239866 0 0 0.285797 0 0.638296V2.34042C0 2.69292 0.239866 2.97872 0.535714 2.97872H19.4643C19.7601 2.97872 20 2.69292 20 2.34042V0.638296C20 0.285797 19.7601 0 19.4643 0Z" fill="currentColor"></path>
+                            </svg></button>
+                        <a href="/" class="svelte-vxxv0k">incididunt</a><a href="/" class="svelte-vxxv0k button">excepteur</a>
+                    </div>
+                </div>
+            </header>
+        </div>
+    </div>
+
+    <style>
+        .section-container.svelte-1yeiarn.svelte-1yeiarn {
+            display: grid;
+            gap: 2rem;
+            padding-top: 9rem
+        }
+
+        .section-container.svelte-1yeiarn>div.svelte-1yeiarn {
+            display: grid;
+            gap: 1.25rem
+        }
+
+        .heading.svelte-1yeiarn.svelte-1yeiarn {
+            font-size: 3rem
+        }
+
+        .heading.svelte-1yeiarn.svelte-1yeiarn:after {
+            display: none
+        }
+
+        .description.svelte-1yeiarn a {
+            transition: 0.1s border-color;
+            border-bottom: 2px solid var(--color-accent)
+        }
+
+        .description.svelte-1yeiarn a:hover {
+            border-color: transparent
+        }
+
+        ul.svelte-1yeiarn.svelte-1yeiarn {
+            display: flex;
+            align-items: center
+        }
+
+        ul.svelte-1yeiarn li.svelte-1yeiarn:not(:last-child) {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem
+        }
+
+        ul.svelte-1yeiarn li.svelte-1yeiarn:not(:last-child):after {
+            content: "";
+            height: 20px;
+            border-right: 2px solid var(--color-accent);
+            padding-right: 1rem
+        }
+
+        ul.svelte-1yeiarn a.svelte-1yeiarn {
+            display: flex;
+            align-items: center
+        }
+
+        ul.svelte-1yeiarn a span.svelte-1yeiarn {
+            margin-left: 0.5rem
+        }
+
+        figure.svelte-1yeiarn.svelte-1yeiarn {
+            position: relative;
+            margin-left: 18px
+        }
+
+        figure.svelte-1yeiarn img.svelte-1yeiarn {
+            width: 226px;
+            height: 226px;
+            border-radius: 50%;
+            z-index: 1;
+            position: relative;
+            -o-object-fit: cover;
+            object-fit: cover
+        }
+
+        figure.svelte-1yeiarn svg.svelte-1yeiarn {
+            position: absolute;
+            top: 0;
+            left: -18px;
+            visibility: hidden
+        }
+
+        figure.svelte-1yeiarn svg circle.svelte-1yeiarn {
+            fill: var(--color-accent);
+            transition: 1s transform
+        }
+
+        figure.svelte-1yeiarn svg circle.svelte-1yeiarn:nth-child(2) {
+            filter: brightness(0.75)
+        }
+
+        figure.svelte-1yeiarn svg circle.svelte-1yeiarn:nth-child(3) {
+            filter: brightness(0.5)
+        }
+
+        figure.svelte-1yeiarn svg.show.svelte-1yeiarn {
+            visibility: visible
+        }
+
+        figure.svelte-1yeiarn svg.show circle.svelte-1yeiarn:nth-child(1) {
+            transform: translateX(-18px)
+        }
+
+        figure.svelte-1yeiarn svg.show circle.svelte-1yeiarn:nth-child(2) {
+            transform: translateX(-12px)
+        }
+
+        figure.svelte-1yeiarn svg.show circle.svelte-1yeiarn:nth-child(3) {
+            transform: translateX(-6px)
+        }
+
+        @media(min-width: 900px) {
+            .section-container.svelte-1yeiarn.svelte-1yeiarn {
+                gap: 6rem;
+                grid-template-columns: auto auto
+            }
+
+            .section-container.svelte-1yeiarn>figure.svelte-1yeiarn {
+                grid-column: 2
+            }
+
+            .section-container.svelte-1yeiarn>div.svelte-1yeiarn {
+                place-content: center;
+                grid-row: 1
+            }
+        }
+    </style>
+    <div class="primo-section has-component" id="nclmo">
+        <div class="primo-component">
+            <div class="section-container svelte-1yeiarn">
+                <figure class="svelte-1yeiarn"><img src="https://picsum.photos/600/400?blur=10" alt="" class="svelte-1yeiarn">
+                    <svg height="226" width="226" class="svelte-1yeiarn">
+                        <circle cx="131" cy="113" r="113" class="svelte-1yeiarn"></circle>
+                        <circle cx="131" cy="113" r="113" class="svelte-1yeiarn"></circle>
+                        <circle cx="131" cy="113" r="113" class="svelte-1yeiarn"></circle>
+                    </svg>
+                </figure>
+                <div class="svelte-1yeiarn">
+                    <h1 class="heading svelte-1yeiarn">John Doe</h1>
+                    <div class="description svelte-1yeiarn">
+                        <!-- HTML_TAG_START -->Nostrud ipsum commodo eu excepteur in sunt veniam in et ullamco tempor. Magna tempor est aute aute aute proident dolore.
+                        <!-- HTML_TAG_END -->
+                    </div>
+                    <ul class="social svelte-1yeiarn">
+                        <li class="svelte-1yeiarn"><a href="/" class="svelte-1yeiarn"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" class="iconify iconify--mdi">
+                                    <!-- HTML_TAG_START -->
+                                    <path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z" /><!-- HTML_TAG_END -->
+                                </svg>
+                                <span class="svelte-1yeiarn">reprehenderit</span></a>
+                        </li>
+                        <li class="svelte-1yeiarn"><a href="/" class="svelte-1yeiarn"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" class="iconify iconify--mdi">
+                                    <!-- HTML_TAG_START -->
+                                    <path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z" /><!-- HTML_TAG_END -->
+                                </svg>
+                                <span class="svelte-1yeiarn">voluptate</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .teasers.svelte-jwf7it.svelte-jwf7it {
+            display: grid;
+            gap: 5rem
+        }
+
+        .teaser.svelte-jwf7it.svelte-jwf7it {
+            display: grid;
+            gap: 2rem
+        }
+
+        .teaser.svelte-jwf7it img.svelte-jwf7it {
+            grid-row: 1;
+            width: 100%;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius)
+        }
+
+        .teaser.svelte-jwf7it .content.svelte-jwf7it {
+            display: grid;
+            gap: 1rem;
+            place-items: flex-start;
+            place-content: center
+        }
+
+        .teaser.svelte-jwf7it .content .heading.svelte-jwf7it {
+            margin-bottom: 0
+        }
+
+        .teaser.svelte-jwf7it .content a.link.svelte-jwf7it {
+            display: inline-flex;
+            align-items: center;
+            color: var(--color-accent);
+            font-weight: 500
+        }
+
+        .teaser.svelte-jwf7it .content a.link svg.svelte-jwf7it {
+            transition: 0.1s transform;
+            transform: translateX(0);
+            position: relative;
+            top: 2px
+        }
+
+        .teaser.svelte-jwf7it .content a.link span.svelte-jwf7it {
+            margin-right: 0.5rem
+        }
+
+        .teaser.svelte-jwf7it .content a.link:hover svg.svelte-jwf7it {
+            transform: translateX(4px)
+        }
+
+        @media(min-width: 700px) {
+            .teaser.svelte-jwf7it.svelte-jwf7it {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+                place-content: flex-start;
+                place-items: center flex-start
+            }
+
+            .teaser.svelte-jwf7it img.svelte-jwf7it {
+                grid-row: initial
+            }
+
+            .teaser.svelte-jwf7it:nth-child(even) .content.svelte-jwf7it {
+                grid-row: 1;
+                grid-column: 2
+            }
+
+            .teaser.svelte-jwf7it:nth-child(even) img.svelte-jwf7it {
+                grid-row: 1;
+                grid-column: 1
+            }
+
+            .rtl.svelte-jwf7it .teaser .content.svelte-jwf7it {
+                grid-row: 1;
+                grid-column: 2
+            }
+
+            .rtl.svelte-jwf7it .teaser img.svelte-jwf7it {
+                grid-row: 1;
+                grid-column: 1
+            }
+
+            .ltr.svelte-jwf7it .teaser .content.svelte-jwf7it {
+                grid-row: 1;
+                grid-column: 1
+            }
+
+            .ltr.svelte-jwf7it .teaser img.svelte-jwf7it {
+                grid-row: 1;
+                grid-column: 2
+            }
+
+            .s-rtl.svelte-jwf7it .teaser:nth-child(odd) .content.svelte-jwf7it {
+                grid-row: 1;
+                grid-column: 2
+            }
+
+            .s-rtl.svelte-jwf7it .teaser:nth-child(odd) img.svelte-jwf7it {
+                grid-row: 1;
+                grid-column: 1
+            }
+
+            .s-rtl.svelte-jwf7it .teaser:nth-child(even) .content.svelte-jwf7it {
+                grid-row: 1;
+                grid-column: 1
+            }
+
+            .s-rtl.svelte-jwf7it .teaser:nth-child(even) img.svelte-jwf7it {
+                grid-row: 1;
+                grid-column: 2
+            }
+
+            .grid.svelte-jwf7it .teasers.svelte-jwf7it {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 5rem
+            }
+
+            .grid.svelte-jwf7it .teaser.svelte-jwf7it {
+                gap: 3rem
+            }
+
+            .grid.svelte-jwf7it .teaser .content.svelte-jwf7it {
+                grid-row: 2;
+                grid-column: 1 / 3
+            }
+
+            .grid.svelte-jwf7it .teaser img.svelte-jwf7it {
+                grid-row: 1;
+                grid-column: 1 / 3
+            }
+        }
+
+        @media(min-width: 1200px) {
+            section.svelte-jwf7it.svelte-jwf7it {
+                gap: 6rem
+            }
+
+            .teaser.svelte-jwf7it.svelte-jwf7it {
+                gap: 6rem
+            }
+        }
+    </style>
+    <div class="primo-section has-component" id="ooaxe">
+        <div class="primo-component">
+            <section class="section-container svelte-jwf7it">
+                <div class="teasers svelte-jwf7it">
+                    <div class="teaser svelte-jwf7it">
+                        <div class="content svelte-jwf7it">
+                            <h2 class="heading svelte-jwf7it">Eu irure id</h2>
+                            <div class="body">
+                                <!-- HTML_TAG_START -->Aute enim occaecat anim irure qui velit consectetur commodo eiusmod voluptate cillum. Veniam irure adipisicing sunt adipisicing cupidatat incididunt veniam adipisicing aute quis excepteur ut irure.
+                                <!-- HTML_TAG_END -->
+                            </div>
+                            <a class="link svelte-jwf7it" href="/"><span class=" svelte-jwf7it">fugiat</span>
+                                <svg width="18" height="24" viewBox="0 0 18 24" fill="none" xmlns="http://www.w3.org/2000/svg" class=" svelte-jwf7it">
+                                    <g clip-path="url(#clip0)">
+                                        <path d="M12.3025 6.16478L12.0342 6.49618C11.8563 6.71584 11.8563 7.072 12.0342 7.2917L15.2189 11.2031H0.955357C0.703886 11.2031 0.5 11.455 0.5 11.7656V12.2344C0.5 12.545 0.703886 12.7969 0.955357 12.7969H15.2189L12.0342 16.7083C11.8563 16.928 11.8563 17.2841 12.0342 17.5038L12.3025 17.8352C12.4803 18.0549 12.7686 18.0549 12.9464 17.8352L17.3666 12.3977C17.5444 12.1781 17.5444 11.8219 17.3666 11.6022L12.9464 6.16478C12.7686 5.94507 12.4803 5.94507 12.3025 6.16478Z" fill="currentColor"></path>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0">
+                                            <rect width="17" height="24" fill="white" transform="translate(0.5)"></rect>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                        </div>
+                        <img src="https://picsum.photos/600/400?blur=10" alt="" class="svelte-jwf7it">
+                    </div>
+                    <div class="teaser svelte-jwf7it">
+                        <div class="content svelte-jwf7it">
+                            <h2 class="heading svelte-jwf7it">Esse aute esse</h2>
+                            <div class="body">
+                                <!-- HTML_TAG_START -->Ea excepteur Lorem nostrud est non laboris occaecat labore. Incididunt tempor quis adipisicing do est elit ipsum cillum non qui anim do consequat exercitation consectetur.
+                                <!-- HTML_TAG_END -->
+                            </div>
+                            <a class="link svelte-jwf7it" href="/"><span class=" svelte-jwf7it">dolore</span>
+                                <svg width="18" height="24" viewBox="0 0 18 24" fill="none" xmlns="http://www.w3.org/2000/svg" class=" svelte-jwf7it">
+                                    <g clip-path="url(#clip0)">
+                                        <path d="M12.3025 6.16478L12.0342 6.49618C11.8563 6.71584 11.8563 7.072 12.0342 7.2917L15.2189 11.2031H0.955357C0.703886 11.2031 0.5 11.455 0.5 11.7656V12.2344C0.5 12.545 0.703886 12.7969 0.955357 12.7969H15.2189L12.0342 16.7083C11.8563 16.928 11.8563 17.2841 12.0342 17.5038L12.3025 17.8352C12.4803 18.0549 12.7686 18.0549 12.9464 17.8352L17.3666 12.3977C17.5444 12.1781 17.5444 11.8219 17.3666 11.6022L12.9464 6.16478C12.7686 5.94507 12.4803 5.94507 12.3025 6.16478Z" fill="currentColor"></path>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0">
+                                            <rect width="17" height="24" fill="white" transform="translate(0.5)"></rect>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                        </div>
+                        <img src="https://picsum.photos/600/400?blur=10" alt="" class="svelte-jwf7it">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <style>
+        .heading.svelte-1bnhrm.svelte-1bnhrm.svelte-1bnhrm {
+            text-align: center;
+            margin-bottom: 1.5rem
+        }
+
+        .accordion.svelte-1bnhrm.svelte-1bnhrm.svelte-1bnhrm {
+            max-width: 800px;
+            margin: 0 auto
+        }
+
+        .accordion.svelte-1bnhrm .item.svelte-1bnhrm.svelte-1bnhrm {
+            padding: 1.5rem 0
+        }
+
+        .accordion.svelte-1bnhrm .item.svelte-1bnhrm.svelte-1bnhrm:not(:last-child) {
+            border-bottom: 1px solid var(--border-color)
+        }
+
+        .accordion.svelte-1bnhrm .item.active button svg.svelte-1bnhrm.svelte-1bnhrm {
+            transform: scaleY(-1)
+        }
+
+        .accordion.svelte-1bnhrm .item button.svelte-1bnhrm.svelte-1bnhrm {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%
+        }
+
+        .accordion.svelte-1bnhrm .item button span.svelte-1bnhrm.svelte-1bnhrm {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-right: 1rem;
+            text-align: left
+        }
+
+        .accordion.svelte-1bnhrm .item button svg.svelte-1bnhrm.svelte-1bnhrm {
+            color: var(--color-accent);
+            transition: transform 0.2s
+        }
+
+        .accordion.svelte-1bnhrm .item button.svelte-1bnhrm+.description.svelte-1bnhrm {
+            padding-top: 0.5rem
+        }
+
+        .accordion.svelte-1bnhrm .item .description.svelte-1bnhrm.svelte-1bnhrm {
+            padding-right: 2rem
+        }
+    </style>
+    <div class="primo-section has-component" id="zunsh">
+        <div class="primo-component">
+            <section class="section-container">
+                <h2 class="heading svelte-1bnhrm">Laboris voluptate laboris</h2>
+                <div class="accordion svelte-1bnhrm">
+                    <div class="item svelte-1bnhrm active"><button class="svelte-1bnhrm"><span class="svelte-1bnhrm">Lorem est ex</span>
+                        </button>
+                        <div class="description svelte-1bnhrm">
+                            <!-- HTML_TAG_START -->Elit laborum anim nisi eiusmod do voluptate consectetur consequat in. Consectetur consectetur commodo duis voluptate esse velit.
+                            <!-- HTML_TAG_END -->
+                        </div>
+                        <noscript>
+                            <div class="description svelte-1bnhrm">
+                                <!-- HTML_TAG_START -->Elit laborum anim nisi eiusmod do voluptate consectetur consequat in. Consectetur consectetur commodo duis voluptate esse velit.
+                                <!-- HTML_TAG_END -->
+                            </div>
+                        </noscript>
+                    </div>
+                    <div class="item svelte-1bnhrm"><button class="svelte-1bnhrm"><span class="svelte-1bnhrm">Eiusmod minim proident</span>
+                        </button>
+
+                        <noscript>
+                            <div class="description svelte-1bnhrm">
+                                <!-- HTML_TAG_START -->Irure pariatur et eu ex eiusmod anim nisi occaecat pariatur et veniam eu cillum. Duis mollit officia sint minim eiusmod nostrud ullamco exercitation occaecat fugiat aliqua labore ullamco.
+                                <!-- HTML_TAG_END -->
+                            </div>
+                        </noscript>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <style>
+        footer.svelte-1pqt5op.svelte-1pqt5op {
+            border-top: 1px solid var(--border-color, #E5E5E7)
+        }
+
+        .section-container.svelte-1pqt5op.svelte-1pqt5op {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem
+        }
+
+        nav.svelte-1pqt5op.svelte-1pqt5op {
+            display: flex;
+            gap: 1rem
+        }
+
+        .primo.svelte-1pqt5op.svelte-1pqt5op {
+            font-weight: 600;
+            font-size: 0.75rem
+        }
+
+        .primo.svelte-1pqt5op a.svelte-1pqt5op {
+            text-decoration: underline;
+            color: rgb(248, 68, 73)
+        }
+
+        ul.svelte-1pqt5op.svelte-1pqt5op {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 1.5rem;
+            list-style: none
+        }
+
+        ul.svelte-1pqt5op a.svelte-1pqt5op {
+            transition: var(--transition)
+        }
+
+        ul.svelte-1pqt5op a.svelte-1pqt5op:hover {
+            color: var(--color-accent)
+        }
+
+        @media(min-width: 600px) {
+            .section-container.svelte-1pqt5op.svelte-1pqt5op {
+                flex-direction: row
+            }
+
+            ul.svelte-1pqt5op.svelte-1pqt5op {
+                font-size: 1.25rem
+            }
+        }
+    </style>
+    <div class="primo-section has-component" id="dvonw">
+        <div class="primo-component">
+            <footer class="svelte-1pqt5op">
+                <div class="section-container svelte-1pqt5op">
+                    <nav class="svelte-1pqt5op"><a href="/">tempor</a><a href="/">cillum</a></nav>
+                    <span class="primo svelte-1pqt5op"><a href="https://primo.so" class="svelte-1pqt5op">Primo</a> Powered </span>
+                    <ul class="svelte-1pqt5op">
+                        <li><a href="/" aria-label="mdi:twitter" class="svelte-1pqt5op"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" class="iconify iconify--mdi">
+                                    <!-- HTML_TAG_START -->
+                                    <path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z" /><!-- HTML_TAG_END -->
+                                </svg></a>
+                        </li>
+                        <li><a href="/" aria-label="mdi:twitter" class="svelte-1pqt5op"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" class="iconify iconify--mdi">
+                                    <!-- HTML_TAG_START -->
+                                    <path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z" /><!-- HTML_TAG_END -->
+                                </svg></a>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
+    <script type="module">
+        import App from '/_modules/vxnaa.js';
+        new App({
+            target: document.querySelector('#acihl'),
+            hydrate: true,
+            props: {
+                ...data,
+                ...data['index'],
+                ...data['index']['acihl']
+            }
+        });
+    </script>
+    <script type="module">
+        import App from '/_modules/ecifc.js';
+        new App({
+            target: document.querySelector('#nclmo'),
+            hydrate: true,
+            props: {
+                ...data,
+                ...data['index'],
+                ...data['index']['nclmo']
+            }
+        });
+    </script>
+    <script type="module">
+        import App from '/_modules/nkwgc.js';
+        new App({
+            target: document.querySelector('#zunsh'),
+            hydrate: true,
+            props: {
+                ...data,
+                ...data['index'],
+                ...data['index']['zunsh']
+            }
+        });
+    </script>
+    <script type="module">
+        import App from '/_modules/ltlut.js';
+        new App({
+            target: document.querySelector('#dvonw'),
+            hydrate: true,
+            props: {
+                ...data,
+                ...data['index'],
+                ...data['index']['dvonw']
+            }
+        });
+    </script>
+</body>
+
+</html>
